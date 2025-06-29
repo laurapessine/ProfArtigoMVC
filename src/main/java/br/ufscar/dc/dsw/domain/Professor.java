@@ -22,6 +22,7 @@ public class Professor extends AbstractEntity<Long> {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column
     private String titulacao; // ex: "Mestrado", "Doutorado"
 
     @Column(unique = true)

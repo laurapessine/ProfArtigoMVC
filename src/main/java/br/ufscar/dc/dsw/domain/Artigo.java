@@ -17,14 +17,17 @@ public class Artigo extends AbstractEntity<Long> {
     @Column(nullable = false)
     private String titulo;
 
+    @Column
     private String resumo;
 
+    @Column
     private String palavrasChave;
 
     @NotNull(message = "{NotNull.artigo.ano}")
     @Column(nullable = false)
     private Integer anoPublicacao;
 
+    @Column
     private String linkPublicacao;
 
     @ManyToMany(mappedBy = "artigos")
