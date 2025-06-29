@@ -29,25 +29,51 @@
                     <th>Título</th>
                     <th>Ano</th>
                     <th>Autores</th>
+                    <th>Detalhes</th>
                     <th>Ação</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr th:each="artigo : ${artigos}">
-                    <td th:text="${artigo.id}"></td>
-                    <td th:text="${artigo.titulo}"></td>
-                    <td th:text="${artigo.anoPublicacao}"></td>
-                    <td th:text="${#strings.listJoin(artigo.autores.![nome], ', ')}"></td>
-                    <td colspan="2">
-                        <a class="btn btn-info btn-sm" th:href="@{/artigos/editar/{id} (id=${artigo.id})}" role="button">
-                            <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-                        </a>
-                        <button th:id="${'btn_artigos/excluir/' + artigo.id}" type="button" class="btn btn-danger btn-sm"
-                                data-toggle="modal" data-target="#myModal">
-                            <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
-                        </button>
-                    </td>
-                </tr>
+                <tbody th:each="artigo : ${artigos}">
+                    <tr>
+                        <td th:text="${artigo.id}"></td>
+                        <td>
+                            <a th:if="${artigo.linkPublicacao != null and not #strings.isEmpty(artigo.linkPublicacao)}"
+                               th:href="${artigo.linkPublicacao}"
+                               th:text="${artigo.titulo}"
+                               target="_blank"></a>
+                            <span th:if="${artigo.linkPublicacao == null or #strings.isEmpty(artigo.linkPublicacao)}"
+                                  th:text="${artigo.titulo}"></span>
+                        </td>
+                        <td th:text="${artigo.anoPublicacao}"></td>
+                        <td th:text="${#strings.listJoin(artigo.autores.![nome], ', ')}"></td>
+                        <td>
+                            <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse"
+                                    th:attr="data-target='#collapse' + ${artigo.id}, aria-controls='collapse' + ${artigo.id}"
+                                    aria-expanded="false">
+                                <span class="oi oi-eye"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <a class="btn btn-info btn-sm" th:href="@{/artigos/editar/{id} (id=${artigo.id})}" role="button">
+                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+                            </a>
+                            <button th:id="${'btn_artigos/excluir/' + artigo.id}" type="button" class="btn btn-danger btn-sm"
+                                    data-toggle="modal" data-target="#myModal">
+                                <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="collapse" th:id="'collapse' + ${artigo.id}">
+                        <td colspan="6">
+                            <div class="card card-body">
+                                <strong>Resumo:</strong>
+                                <p th:text="${artigo.resumo}"></p>
+                                <hr/>
+                                <strong>Palavras-Chave:</strong>
+                                <p th:text="${artigo.palavrasChave}"></p>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

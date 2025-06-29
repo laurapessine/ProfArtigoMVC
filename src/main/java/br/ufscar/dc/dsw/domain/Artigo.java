@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Table;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
@@ -30,7 +31,7 @@ public class Artigo extends AbstractEntity<Long> {
     @Column
     private String linkPublicacao;
 
-    @ManyToMany(mappedBy = "artigos")
+    @ManyToMany(mappedBy = "artigos", fetch = FetchType.EAGER)
     private List<Professor> autores;
 
     public String getTitulo() {
