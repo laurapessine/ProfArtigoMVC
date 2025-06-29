@@ -27,7 +27,7 @@ public class Artigo extends AbstractEntity<Long> {
     @Column
     private String palavrasChave;
 
-    @NotNull(message = "{NotNull.artigo.ano}")
+    @NotNull(message = "{NotNull.artigo.anoPublicacao}")
     @Column(nullable = false)
     private Integer anoPublicacao;
 
