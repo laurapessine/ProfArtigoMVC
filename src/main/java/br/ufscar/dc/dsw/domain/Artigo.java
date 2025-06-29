@@ -17,7 +17,7 @@ public class Artigo extends AbstractEntity<Long> {
     @Column(nullable = false)
     private String titulo;
 
-    @Column
+    @Column(length = 2000)
     private String resumo;
 
     @Column
