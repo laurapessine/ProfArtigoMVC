@@ -1,75 +1,64 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
-<head>
-    <meta charset="UTF-8"/>
-</head>
-<body>
-<section class="layout-content" layout:fragment="corpo">
-
-    <nav class="navbar navbar-expand-md bg-light">
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <i class="oi oi-caret-right"></i>
-                    <span>Cadastrar Professor</span>
-                </li>
-            </ul>
-        </div>
-        <a class="btn btn-primary btn-md" th:href="@{/professores/listar}" role="button">
-            <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
-            <span>Listar Professores</span>
-        </a>
-    </nav>
-
-    <div class="container" id="cadastro">
-        <div th:replace="~{fragments/alert}"></div>
-
-        <form th:action="${professor.id == null} ? @{/professores/salvar} : @{/professores/editar}"
-              th:object="${professor}" method="POST">
-              
-            <div th:replace="~{fragments/validacao :: validacao}"></div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="nome">Nome Completo</label>
-                    <input type="text" class="form-control" id="nome" th:field="*{nome}" autofocus="autofocus"
-                           th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"/>
-                    <div class="invalid-feedback">
-                        <span th:errors="*{nome}"></span>
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section class="layout-content" layout:fragment="corpo">
+            <nav class="navbar navbar-expand-md bg-light">
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <i class="oi oi-caret-right"></i>
+                            <span>Cadastrar professor</span>
+                        </li>
+                    </ul>
+                </div>
+                <a class="btn btn-primary btn-md" th:href="@{/professores/listar}" role="button">
+                    <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
+                    <span>Listar professores</span>
+                </a>
+            </nav>
+            <div class="container" id="cadastro">
+                <div th:replace="~{fragments/alert}"></div>
+                <form th:action="${professor.id == null} ? @{/professores/salvar} : @{/professores/editar}" th:object="${professor}" method="POST">
+                    <div th:replace="~{fragments/validacao :: validacao}"></div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nome">Nome completo</label>
+                            <input type="text" class="form-control" id="nome" th:field="*{nome}" autofocus="autofocus" th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"/>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{nome}"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">E-mail institucional</label>
+                            <input type="email" class="form-control" id="email" th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"/>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{email}"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="email">E-mail Institucional</label>
-                    <input type="email" class="form-control" id="email" th:field="*{email}"
-                           th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"/>
-                    <div class="invalid-feedback">
-                        <span th:errors="*{email}"></span>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="titulacao">Titulação</label>
+                            <input type="text" class="form-control" id="titulacao" th:field="*{titulacao}"/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="foto">URL da foto</label>
+                            <input type="text" class="form-control" id="foto" th:field="*{foto}"/>
+                        </div>
                     </div>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="lattes">Link para o Currículo Lattes</label>
+                            <input type="text" class="form-control" id="lattes" th:field="*{lattes}"/>
+                        </div>
+                    </div>
+                    <input type="hidden" id="id" th:field="*{id}"/>
+                    <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                </form>
             </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="titulacao">Titulação</label>
-                    <input type="text" class="form-control" id="titulacao" th:field="*{titulacao}"/>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="foto">URL da Foto</label>
-                    <input type="text" class="form-control" id="foto" th:field="*{foto}"/>
-                </div>
-            </div>
-            
-            <div class="form-row">
-                 <div class="form-group col-md-12">
-                    <label for="lattes">Link para o Currículo Lattes</label>
-                    <input type="text" class="form-control" id="lattes" th:field="*{lattes}"/>
-                </div>
-            </div>
-
-            <input type="hidden" id="id" th:field="*{id}"/>
-            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-        </form>
-    </div>
-</section>
-</body>
+        </section>
+    </body>
 </html>
