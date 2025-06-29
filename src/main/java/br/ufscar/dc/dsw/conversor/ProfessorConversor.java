@@ -15,15 +15,10 @@ public class ProfessorConversor implements Converter<String, Professor> {
 
     @Override
     public Professor convert(String text) {
-        // Se o texto estiver vazio ou nulo, retorna nulo
         if (text.isEmpty() || text == null) {
             return null;
         }
-        
-        // Converte o ID de String para Long
         Long id = Long.valueOf(text);
-        
-        // Busca o professor no banco de dados pelo ID
         return professorService.buscarPorId(id);
     }
 }

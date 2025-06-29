@@ -4,9 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
 import jakarta.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -31,9 +30,8 @@ public class Professor extends AbstractEntity<Long> {
     @Column(unique = true)
     private String lattes; // URL para o Lattes
 
-    @ManyToMany
-    @JoinTable(name = "Professor_Artigo", joinColumns = @JoinColumn(name = "professor_id"), inverseJoinColumns = @JoinColumn(name = "artigo_id"))
-    private List<Artigo> artigos;
+    @ManyToMany(mappedBy = "autores")
+    private List<Artigo> artigos = new ArrayList<>();
 
     public String getNome() {
         return nome;
@@ -81,5 +79,10 @@ public class Professor extends AbstractEntity<Long> {
 
     public void setArtigos(List<Artigo> artigos) {
         this.artigos = artigos;
+    }
+
+    public void addArtigo(Artigo artigo) {
+        this.artigos.add(artigo);
+        artigo.getAutores().add(this);
     }
 }

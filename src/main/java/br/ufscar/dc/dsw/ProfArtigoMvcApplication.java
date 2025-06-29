@@ -4,11 +4,13 @@ import br.ufscar.dc.dsw.dao.IArtigoDAO;
 import br.ufscar.dc.dsw.dao.IProfessorDAO;
 import br.ufscar.dc.dsw.domain.Artigo;
 import br.ufscar.dc.dsw.domain.Professor;
+
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import java.util.List;
 
 @SpringBootApplication
 public class ProfArtigoMvcApplication {
@@ -21,7 +23,6 @@ public class ProfArtigoMvcApplication {
 	public CommandLineRunner demo(IProfessorDAO professorDAO, IArtigoDAO artigoDAO) {
 		return (args) -> {
 
-			// 1. Criar e salvar os Professores primeiro
 			Professor p1 = new Professor();
 			p1.setNome("Delano Medeiros Beder");
 			p1.setEmail("delano@ufscar.br");
@@ -45,8 +46,7 @@ public class ProfArtigoMvcApplication {
 			p3.setFoto("https://servicosweb.cnpq.br/wspessoa/servletrecuperafoto?tipo=1&id=K4559326J1");
 			p3.setLattes("http://lattes.cnpq.br/0452415038078829");
 			professorDAO.save(p3);
-
-			// 2. Criar os Artigos
+			
 			Artigo a1 = new Artigo();
 			a1.setTitulo("Exact approaches for the Minimum Subgraph Diameter Problem");
 			a1.setResumo("Este trabalho aborda o Minimum Subgraph Diameter Problem (MSDP), propondo um modelo de programação inteira mista (MILP) e novas estratégias exatas para encontrar subgrafos com diâmetro mínimo sob restrição de custo. Os resultados mostram a eficácia das abordagens propostas.");
@@ -66,7 +66,7 @@ public class ProfArtigoMvcApplication {
 			a3.setTitulo("Computação em Nuvem e Big Data"); // fictício!
 			a3.setResumo("Uma análise sobre a sinergia entre Cloud e Big Data.");
 			a3.setAnoPublicacao(2025);
-			a3.setAutores(List.of(p1, p2));
+			a3.setAutores(List.of(p1, p2, p3));
 			artigoDAO.save(a3);
 		};
 	}
