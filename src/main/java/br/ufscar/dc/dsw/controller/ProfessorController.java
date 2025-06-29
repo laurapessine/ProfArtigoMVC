@@ -60,9 +60,7 @@ public class ProfessorController {
 
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
-        // Adicionar verificação de negócio: não excluir professor se tiver artigos associados.
-        // Similar à verificação service.editoraTemLivros(id) no Roteiro08-01.md
-        if (professorService.professorTemArtigos(id)) { // Você precisará criar este método no seu serviço
+        if (professorService.professorTemArtigos(id)) {
             attr.addFlashAttribute("fail", "Professor não excluído. Possui artigo(s) vinculado(s).");
         } else {
             professorService.excluir(id);
