@@ -39,19 +39,19 @@ public class ArtigoRestController {
 
     @PostMapping("/artigos")
     public ResponseEntity<Artigo> criar(@Valid @RequestBody Artigo artigo) {
-        artigoService.salvar(artigo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(artigo);
+        Artigo artigoSalvo = artigoService.salvar(artigo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(artigoSalvo);
     }
     
     @PutMapping("/artigos/{id}")
     public ResponseEntity<Artigo> atualizar(@PathVariable Long id, @Valid @RequestBody Artigo artigo) {
-        Artigo existente = artigoService.buscarPorId(id);
-        if (existente == null) {
+        Artigo artigoExistente = artigoService.buscarPorId(id);
+        if (artigoExistente == null) {
             return ResponseEntity.notFound().build();
         }
         artigo.setId(id);
-        artigoService.salvar(artigo);
-        return ResponseEntity.ok(artigo);
+        Artigo artigoSalvo = artigoService.salvar(artigo);
+        return ResponseEntity.ok(artigoSalvo);
     }
 
     @DeleteMapping("/artigos/{id}")

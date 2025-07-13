@@ -15,8 +15,9 @@ public class ArtigoService implements IArtigoService {
     @Autowired
     IArtigoDAO dao;
 
-    public void salvar(Artigo artigo) {
-        dao.save(artigo);
+    @Override
+    public Artigo salvar(Artigo artigo) {
+        return dao.save(artigo);
     }
 
     public void excluir(Long id) {

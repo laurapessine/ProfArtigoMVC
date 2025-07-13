@@ -5,7 +5,10 @@ import br.ufscar.dc.dsw.domain.Artigo;
 
 public interface IArtigoService {
     Artigo buscarPorId(Long id);
+
     List<Artigo> buscarTodos();
-    void salvar(Artigo artigo);
+
+    Artigo salvar(Artigo artigo);
+
     void excluir(Long id);
 }
