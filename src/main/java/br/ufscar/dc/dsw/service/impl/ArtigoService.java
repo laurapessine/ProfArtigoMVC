@@ -24,9 +24,10 @@ public class ArtigoService implements IArtigoService {
         dao.deleteById(id);
     }
 
+    @Override
     @Transactional(readOnly = true)
     public Artigo buscarPorId(Long id) {
-        return dao.findById(id).get();
+        return dao.findByIdWithAutores(id);
     }
 
     @Transactional(readOnly = true)
