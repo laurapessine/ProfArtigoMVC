@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
@@ -9,10 +10,10 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @SuppressWarnings("serial")
+@JsonIgnoreProperties(value = { "artigos" })
 @Entity
 @Table(name = "Professor")
 public class Professor extends AbstractEntity<Long> {
-
     @NotBlank(message = "{NotBlank.professor.nome}")
     @Column(nullable = false)
     private String nome;
