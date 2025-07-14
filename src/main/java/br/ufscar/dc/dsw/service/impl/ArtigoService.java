@@ -16,7 +16,7 @@ import br.ufscar.dc.dsw.service.spec.IArtigoService;
 public class ArtigoService implements IArtigoService {
     @Autowired
     IArtigoDAO dao;
-    
+
     @Autowired
     IProfessorDAO professorDAO;
 
@@ -51,6 +51,6 @@ public class ArtigoService implements IArtigoService {
 
     @Transactional(readOnly = true)
     public List<Artigo> buscarTodos() {
-        return dao.findAll();
+        return new ArrayList<Artigo>((dao.findAll() instanceof List) ? (List<Artigo>) dao.findAll() : new ArrayList<Artigo>());
     }
 }

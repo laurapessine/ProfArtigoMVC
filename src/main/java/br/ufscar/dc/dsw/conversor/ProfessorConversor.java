@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.conversor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import br.ufscar.dc.dsw.domain.Professor;
@@ -14,8 +15,8 @@ public class ProfessorConversor implements Converter<String, Professor> {
     private IProfessorService professorService;
 
     @Override
-    public Professor convert(String text) {
-        if (text.isEmpty() || text == null) {
+    public Professor convert(@NonNull String text) {
+        if (text.isEmpty()) {
             return null;
         }
         Long id = Long.valueOf(text);

@@ -11,7 +11,6 @@ import br.ufscar.dc.dsw.service.spec.IProfessorService;
 @Service
 @Transactional(readOnly = false)
 public class ProfessorService implements IProfessorService {
-
     @Autowired
     IProfessorDAO dao;
 
@@ -30,7 +29,10 @@ public class ProfessorService implements IProfessorService {
 
     @Transactional(readOnly = true)
     public List<Professor> buscarTodos() {
-        return dao.findAll();
+        Iterable<Professor> iterable = dao.findAll();
+        List<Professor> list = new java.util.ArrayList<>();
+        iterable.forEach(list::add);
+        return list;
     }
 
     @Transactional(readOnly = true)
