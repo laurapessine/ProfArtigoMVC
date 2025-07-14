@@ -1,11 +1,14 @@
 package br.ufscar.dc.dsw.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.dc.dsw.dao.IArtigoDAO;
+import br.ufscar.dc.dsw.dao.IProfessorDAO;
 import br.ufscar.dc.dsw.domain.Artigo;
+import br.ufscar.dc.dsw.domain.Professor;
 import br.ufscar.dc.dsw.service.spec.IArtigoService;
 
 @Service
@@ -13,9 +16,20 @@ import br.ufscar.dc.dsw.service.spec.IArtigoService;
 public class ArtigoService implements IArtigoService {
     @Autowired
     IArtigoDAO dao;
+    
+    @Autowired
+    IProfessorDAO professorDAO;
 
     @Override
     public Artigo salvar(Artigo artigo) {
+        List<Professor> autoresCompletos = new ArrayList<>();
+        if (artigo.getAutores() != null) {
+            for (Professor autor : artigo.getAutores()) {
+                Professor autorCompleto = professorDAO.findById(autor.getId()).get();
+                autoresCompletos.add(autorCompleto);
+            }
+        }
+        artigo.setAutores(autoresCompletos);
         return dao.save(artigo);
     }
 

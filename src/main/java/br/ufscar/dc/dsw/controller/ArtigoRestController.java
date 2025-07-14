@@ -39,8 +39,8 @@ public class ArtigoRestController {
 
     @PostMapping("/artigos")
     public ResponseEntity<Artigo> criar(@Valid @RequestBody Artigo artigo) {
-        Artigo artigoCompleto = artigoService.criar(artigo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(artigoCompleto);
+        Artigo artigoSalvo = artigoService.salvar(artigo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(artigoSalvo);
     }
     
     @PutMapping("/artigos/{id}")
