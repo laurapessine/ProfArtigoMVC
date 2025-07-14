@@ -11,13 +11,18 @@ import br.ufscar.dc.dsw.service.spec.IArtigoService;
 @Service
 @Transactional(readOnly = false)
 public class ArtigoService implements IArtigoService {
-
     @Autowired
     IArtigoDAO dao;
 
     @Override
     public Artigo salvar(Artigo artigo) {
         return dao.save(artigo);
+    }
+
+    @Override
+    public Artigo criar(Artigo artigo) {
+        Artigo artigoSalvo = dao.save(artigo);
+        return dao.findByIdWithAutores(artigoSalvo.getId());
     }
 
     public void excluir(Long id) {

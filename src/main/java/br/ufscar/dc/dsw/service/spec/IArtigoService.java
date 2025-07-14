@@ -10,5 +10,7 @@ public interface IArtigoService {
 
     Artigo salvar(Artigo artigo);
 
+    Artigo criar(Artigo artigo);
+
     void excluir(Long id);
 }
